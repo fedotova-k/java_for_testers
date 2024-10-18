@@ -2,9 +2,8 @@ package ru.stqa.geometry;
 
 public class Geometry {
     public static void main(String[] args) {
-        Triangle triangle = new Triangle (5,9,7);
 
-        System.out.println("Площадь треугольника равна: "+(triangle.countTriangleSquare()));
-        System.out.println("Периметр треугольника равен: "+ (triangle.countTrianglePerimeter()));
+        System.out.println("Площадь треугольника равна: "+(Triangle.countTriangleSquare(6,7,9)));
+        System.out.println("Периметр треугольника равен: "+ (Triangle.countTrianglePerimeter(6,7,9)));
     }
 }
