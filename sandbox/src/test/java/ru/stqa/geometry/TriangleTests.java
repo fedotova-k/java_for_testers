@@ -8,11 +8,13 @@ public class TriangleTests {
 
     @Test
     void canCalculateSquare() {
-        Assertions.assertEquals(17.320508075688775, Triangle.countTriangleSquare(5.0, 7.0, 8.0));
+        var triangle = new Triangle(5.0,7.0,8.0);
+        double result = triangle.countTriangleSquare();
+        Assertions.assertEquals(17.320508075688775, result);
     }
 
     void canCalculatePerimeter() {
-        Assertions.assertEquals(20, Triangle.countTriangleSquare(5.0, 7.0, 8.0));
+        Assertions.assertEquals(20, new Triangle(5.0,7.0,8.0).countTriangleSquare());
     }
 }
 
