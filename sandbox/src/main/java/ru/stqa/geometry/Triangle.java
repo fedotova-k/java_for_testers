@@ -10,6 +10,9 @@ public class Triangle {
         if ((a <= 0) || (b <= 0) || (c <= 0)) {
             throw new IllegalArgumentException("Значение должно быть больше нуля");
         }
+        else if ((a + b < c) || (b + c < a) || (c + a < b)) {
+            throw new IllegalArgumentException("Сумма двух любых сторон должна быть не меньше третьей стороны");
+        }
         this.a = a;
         this.b = b;
         this.c = c;
