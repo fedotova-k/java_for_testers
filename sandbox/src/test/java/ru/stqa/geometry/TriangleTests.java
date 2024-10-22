@@ -24,8 +24,7 @@ public class TriangleTests {
             new Triangle(4.0, -4.0, 5.0);
             Assertions.fail();
         } catch (IllegalArgumentException exception) {
-            System.out.println("Одна из сторон меньше нуля");
-
+            //System.out.println("Одна из сторон меньше нуля");
         }
     }
 
@@ -35,7 +34,7 @@ public class TriangleTests {
             new Triangle(1.0, 2.0, 9.0);
             Assertions.fail();
         } catch (IllegalArgumentException exception) {
-            System.out.println("Нарушено неравенство треугольника");
+            //System.out.println("Нарушено неравенство треугольника");
         }
     }
 }
