@@ -7,10 +7,14 @@ public class Triangle {
     double c;
 
     public Triangle(double a, double b, double c) {
-     this.a =a;
-     this.b =b;
-     this.c =c;
-}
+        if ((a <= 0) || (b <= 0) || (c <= 0)) {
+            throw new IllegalArgumentException("Значение должно быть больше нуля");
+        }
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
     public double countTriangleSquare() { // метод для высчитаывания площади по формуле Герона
         double semiperimeter = ((this.a + this.b + this.c) / 2); // высчитываем полупериметр
         return Math.sqrt((semiperimeter * (semiperimeter - this.a) * (semiperimeter - this.b) * (semiperimeter - this.c))); // рассчет по формуле Герона
