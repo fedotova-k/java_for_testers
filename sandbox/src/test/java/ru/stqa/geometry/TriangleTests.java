@@ -12,9 +12,9 @@ public class TriangleTests {
         double result = triangle.countTriangleSquare();
         Assertions.assertEquals(17.320508075688775, result);
     }
-
+    @Test
     void canCalculatePerimeter() {
-        Assertions.assertEquals(20, new Triangle(5.0,7.0,8.0).countTriangleSquare());
+        Assertions.assertEquals(20, new Triangle(5.0,7.0,8.0).countTrianglePerimeter());
     }
 }
 
