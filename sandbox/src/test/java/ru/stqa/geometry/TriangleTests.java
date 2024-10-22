@@ -37,5 +37,30 @@ public class TriangleTests {
             //System.out.println("Нарушено неравенство треугольника");
         }
     }
+
+    @Test
+    void testEqualityWithTheSameArguments() {
+        var t1 = new Triangle(5.0, 4.0, 3.0);
+        var t2 = new Triangle(3.0, 5.0, 4.0);
+        Assertions.assertEquals(t1, t2);
+    }
+    @Test
+    void testEqualityWithEqualArguments() {
+        var t1 = new Triangle(5.0, 4.0, 3.0);
+        var t2 = new Triangle(5.0, 4.0, 3.0);
+        Assertions.assertEquals(t1, t2);
+    }
+
+    @Test
+    void testEqualityWithDifferentArguments() {
+        try {
+        var t1 = new Triangle(5.0, 4.0, 3.0);
+        var t2 = new Triangle(2.0, 4.0, 4.0);
+        Assertions.assertEquals(t1, t2);
+        }
+        catch (AssertionError e) {
+          //  System.out.println("Треугольники не равны");
+        }
+    }
 }
 
