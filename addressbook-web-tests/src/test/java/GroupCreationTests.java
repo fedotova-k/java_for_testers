@@ -2,7 +2,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,14 +11,10 @@ import java.util.Map;
 
 public class GroupCreationTests {
     private WebDriver driver;
-    private Map<String, Object> vars;
-    JavascriptExecutor js;
 
     @BeforeEach
     public void setUp() {
         driver = new FirefoxDriver();
-        js = (JavascriptExecutor) driver;
-        vars = new HashMap<String, Object>();
     }
 
     @AfterEach
@@ -37,7 +32,7 @@ public class GroupCreationTests {
         driver.findElement(By.linkText("groups")).click();
         driver.findElement(By.name("new")).click();
         driver.findElement(By.name("group_name")).click();
-        driver.findElement(By.name("group_name")).sendKeys("Test");
+        driver.findElement(By.name("group_name")).sendKeys("Test group");
         driver.findElement(By.name("group_header")).click();
         driver.findElement(By.name("group_header")).sendKeys("header");
         driver.findElement(By.name("group_footer")).sendKeys("footer");
