@@ -45,12 +45,17 @@ public class TriangleTests {
         Assertions.assertEquals(t1, t2);
     }
     @Test
-    void testEqualityWithEqualArguments() {
-        var t1 = new Triangle(5.0, 4.0, 3.0);
+    void testEqualityWithAlmostEqualArguments() {
+        var t1 = new Triangle(4.0, 5.0, 3.0);
         var t2 = new Triangle(5.0, 4.0, 3.0);
         Assertions.assertEquals(t1, t2);
     }
-
+    @Test
+    void testTwoEqualityWithAlmostEqualArguments() {
+        var t1 = new Triangle(4.0, 5.0, 3.0);
+        var t2 = new Triangle(4.0, 3.0, 5.0);
+        Assertions.assertEquals(t1, t2);
+    }
     @Test
     void testEqualityWithDifferentArguments() {
         try {
@@ -62,5 +67,6 @@ public class TriangleTests {
           //  System.out.println("Треугольники не равны");
         }
     }
+
 }
 
