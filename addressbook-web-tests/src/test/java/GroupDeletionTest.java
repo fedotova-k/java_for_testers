@@ -1,8 +1,6 @@
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,17 +11,12 @@ public class GroupDeletionTest {
     @BeforeEach
     public void setUp() {
         driver = new FirefoxDriver();
+        Runtime.getRuntime().addShutdownHook(new Thread(driver::quit));
         driver.get("http://localhost/addressbook/addressbook/");
-        driver.manage().window().setSize(new Dimension(1644, 937));
+        driver.findElement(By.name("user")).click();
         driver.findElement(By.name("user")).sendKeys("admin");
         driver.findElement(By.name("pass")).sendKeys("secret");
         driver.findElement(By.xpath("//input[@value=\'Login\']")).click();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.findElement(By.xpath("//a[contains(text(),\'Logout\')]")).click();
-        driver.quit();
     }
 
     @Test
@@ -31,7 +24,7 @@ public class GroupDeletionTest {
         if (!isElementPresent(By.name("new"))) {
             driver.findElement(By.linkText("groups")).click();
         }
-        if (! isElementPresent(By.name("selected[]"))) {
+        if (!isElementPresent(By.name("selected[]"))) {
             driver.findElement(By.linkText("groups")).click();
             driver.findElement(By.name("new")).click();
             driver.findElement(By.name("group_name")).click();
