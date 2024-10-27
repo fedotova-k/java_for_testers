@@ -7,7 +7,7 @@ public class GroupDeletionTest extends TestBase {
 
     @Test
     public void groupDeletionTest() {
-            if (!app.groups().isGroupPresent()) {
+        if (!app.groups().isGroupPresent()) {
             app.groups().createGroup(new GroupData("New group", "header", "footer"));
         }
         app.groups().removeGroup();
