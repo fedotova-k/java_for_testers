@@ -7,9 +7,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class ContactDeletionTest {
-
-    private static WebDriver driver;
+public class ContactDeletionTest extends TestBase {
 
     @BeforeEach
     public void setUp() {
@@ -45,14 +43,5 @@ public class ContactDeletionTest {
         driver.findElement(By.name("selected[]")).click();
         driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
         driver.findElement(By.xpath("//a[contains(text(),\'home\')]")).click();
-    }
-
-    private boolean isElementPresent(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException exception) {
-            return false;
-        }
     }
 }

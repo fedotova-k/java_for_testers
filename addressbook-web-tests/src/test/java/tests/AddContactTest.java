@@ -3,14 +3,10 @@ package tests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class AddContactTest {
-
-    private static WebDriver driver;
+public class AddContactTest extends TestBase {
 
     @BeforeEach
     public void setUp() {
@@ -83,12 +79,4 @@ public class AddContactTest {
         driver.findElement(By.xpath("//a[contains(text(),\'home\')]")).click();
     }
 
-    private boolean isElementPresent(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException exception) {
-            return false;
-        }
-    }
 }
