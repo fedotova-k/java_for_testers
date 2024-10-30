@@ -23,13 +23,26 @@ public class ContactsHelper {
         manager.driver.findElement(By.xpath("//a[contains(text(),\'home\')]")).click();
     }
 
-    public boolean isContactPresent() {
-        return manager.isElementPresent(By.name("selected[]"));
+  
+    public void deleteContact(ApplicationManager manager) {
+        manager.driver.findElement(By.name("selected[]")).click();
+        manager.driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
+        manager.contact().openHomePage(manager);
+    }
+
+    public void openHomePage(ApplicationManager manager) {
+        if (!manager.isElementPresent(By.name("home"))) {
+            manager.driver.findElement(By.linkText("home")).click();
+        }
     }
 
     public void openContactsPage() {
         if (!manager.isElementPresent(By.name("submit"))) {
             manager.driver.findElement(By.linkText("add new")).click();
         }
+    }
+
+    public boolean isContactPresent() {
+        return manager.isElementPresent(By.name("selected[]"));
     }
 }

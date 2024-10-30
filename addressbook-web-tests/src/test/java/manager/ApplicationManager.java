@@ -50,19 +50,6 @@ public class ApplicationManager {
         return groups;
     }
 
-
-    public void deleteContact() {
-        driver.findElement(By.name("selected[]")).click();
-        driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
-        openHomePage();
-    }
-
-    public void openHomePage() {
-        if (!isElementPresent(By.name("home"))) {
-            driver.findElement(By.linkText("home")).click();
-        }
-    }
-
     public boolean isElementPresent(By locator) {
         try {
             driver.findElement(locator);
