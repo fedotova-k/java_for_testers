@@ -3,12 +3,10 @@ package manager;
 import model.ContactData;
 import org.openqa.selenium.By;
 
-public class ContactsHelper {
-
-    private final ApplicationManager manager;
+public class ContactsHelper extends HelperBase {
 
     public ContactsHelper(ApplicationManager manager) {
-        this.manager = manager;
+        super (manager);
     }
 
     public void createContact(ContactData contact) {
@@ -19,16 +17,6 @@ public class ContactsHelper {
         click(By.name("submit"));
         openHomePage(manager);
     }
-
-    private void type(By locator, String name) {
-        click(locator);
-        manager.driver.findElement(locator).sendKeys(name);
-    }
-
-    public void click(By locator) {
-     manager.driver.findElement(locator).click();
-   }
-
 
     public void deleteContact(ApplicationManager manager) {
         click(By.name("selected[]"));
