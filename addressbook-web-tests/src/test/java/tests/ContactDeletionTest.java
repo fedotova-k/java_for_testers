@@ -7,11 +7,8 @@ public class ContactDeletionTest extends TestBase {
 
     @Test
     public void contactDeletion() {
-
-        app.openHomePage();//перенести в метод
-
-        if (!app.isContactPresent()) {
-            app.createContact(new ContactData().withFirstName("test"));
+        if (!app.contact().isContactPresent()) {
+            app.contact().createContact(new ContactData().withFirstName("test"));
         }
         app.deleteContact();
     }

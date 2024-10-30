@@ -3,7 +3,7 @@ package model;
 public record ContactData(String firstName, String middleName, String lastName, String address, String email) {
 
     public ContactData() {
-        this("", "", "", "","");
+        this("", "", "", "", "");
     }
 
     public ContactData withFirstName(String firstName) {
@@ -17,5 +17,6 @@ public record ContactData(String firstName, String middleName, String lastName, 
     public ContactData withAllData(String firstName, String middleName, String lastName, String address, String email) {
         return new ContactData(firstName, middleName, lastName, address, email);
     }
+
 }
 
