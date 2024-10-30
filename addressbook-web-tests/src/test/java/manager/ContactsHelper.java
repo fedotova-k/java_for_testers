@@ -13,32 +13,38 @@ public class ContactsHelper {
 
     public void createContact(ContactData contact) {
         openContactsPage();
-        manager.driver.findElement(By.name("firstname")).click();
-        manager.driver.findElement(By.name("firstname")).sendKeys(contact.firstName());
-        manager.driver.findElement(By.name("middlename")).click();
-        manager.driver.findElement(By.name("middlename")).sendKeys(contact.middleName());
-        manager.driver.findElement(By.name("lastname")).click();
-        manager.driver.findElement(By.name("lastname")).sendKeys(contact.lastName());
-        manager.driver.findElement(By.name("submit")).click();
-        manager.driver.findElement(By.xpath("//a[contains(text(),\'home\')]")).click();
+        type (By.name ("firstname"), contact.firstName());
+        type(By.name ("middlename"), contact.middleName());
+        type(By.name ("lastname"), contact.lastName());
+        click(By.name("submit"));
+        openHomePage(manager);
     }
 
-  
+    private void type(By locator, String name) {
+        click(locator);
+        manager.driver.findElement(locator).sendKeys(name);
+    }
+
+    public void click(By locator) {
+     manager.driver.findElement(locator).click();
+   }
+
+
     public void deleteContact(ApplicationManager manager) {
-        manager.driver.findElement(By.name("selected[]")).click();
-        manager.driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
+        click(By.name("selected[]"));
+        click(By.xpath("//input[@value=\'Delete\']"));
         manager.contact().openHomePage(manager);
     }
 
     public void openHomePage(ApplicationManager manager) {
         if (!manager.isElementPresent(By.name("home"))) {
-            manager.driver.findElement(By.linkText("home")).click();
+            click(By.linkText("home"));
         }
     }
 
     public void openContactsPage() {
         if (!manager.isElementPresent(By.name("submit"))) {
-            manager.driver.findElement(By.linkText("add new")).click();
+            click(By.linkText("add new"));
         }
     }
 
