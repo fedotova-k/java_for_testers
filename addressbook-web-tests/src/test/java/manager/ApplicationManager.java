@@ -1,5 +1,6 @@
 package manager;
 
+import model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -14,12 +15,11 @@ public class ApplicationManager {
 
     public void init(String browser) {
         if (driver == null) {
-            if ("firefox".equals(browser)){
+            if ("firefox".equals(browser)) {
                 driver = new FirefoxDriver();
             } else if ("chrome".equals(browser)) {
                 driver = new ChromeDriver();
-            }
-            else {
+            } else {
                 throw new IllegalArgumentException(String.format("Unknown browser %s", browser));
             }
             Runtime.getRuntime().addShutdownHook(new Thread(driver::quit));
@@ -43,6 +43,31 @@ public class ApplicationManager {
         return groups;
     }
 
+    public void createContact(ContactData contact) {
+        openHomePage();
+        driver.findElement(By.xpath("//input[@name=\'firstname\']")).click();
+        driver.findElement(By.xpath("//input[@name=\'firstname\']")).sendKeys(contact.firstName());
+        driver.findElement(By.xpath("//input[@name=\'middlename\']")).click();
+        driver.findElement(By.xpath("//input[@name=\'middlename\']")).sendKeys(contact.middleName());
+        driver.findElement(By.xpath("//input[@name=\'lastname\']")).click();
+        driver.findElement(By.xpath("//input[@name=\'lastname\']")).sendKeys(contact.lastName());
+        driver.findElement(By.xpath("(//input[@name=\'submit\'])[2]")).click();
+        driver.findElement(By.xpath("//a[contains(text(),\'home\')]")).click();
+    }
+
+
+    public void deleteContact() {
+        driver.findElement(By.name("selected[]")).click();
+        driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
+        driver.findElement(By.xpath("//a[contains(text(),\'home\')]")).click();
+    }
+
+    public void openHomePage() {
+        if (!isElementPresent(By.name("home"))) {
+            driver.findElement(By.linkText("home")).click();
+        }
+    }
+
     public boolean isElementPresent(By locator) {
         try {
             driver.findElement(locator);
@@ -52,4 +77,13 @@ public class ApplicationManager {
         }
     }
 
+    public void openContactsPage() {
+        if (!isElementPresent(By.name("submit"))) {
+            driver.findElement(By.linkText("add new")).click();
+        }
+    }
+
+    public boolean isContactPresent() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }

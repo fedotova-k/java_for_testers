@@ -1,15 +1,14 @@
 package tests;
 
 import manager.ApplicationManager;
+import model.ContactData;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 
 public class TestBase {
 
     protected static ApplicationManager app;
-    protected static WebDriver driver;
+
 
     @BeforeEach
     public void setUp() {
@@ -19,12 +18,4 @@ public class TestBase {
         app.init(System.getProperty("browser", "chrome"));
     }
 
-    protected boolean isElementPresent(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException exception) {
-            return false;
-        }
-    }
 }
