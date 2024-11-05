@@ -1,19 +1,20 @@
 package manager;
 
 import model.ContactData;
+import model.GroupData;
 import org.openqa.selenium.By;
 
 public class ContactsHelper extends HelperBase {
 
     public ContactsHelper(ApplicationManager manager) {
-        super (manager);
+        super(manager);
     }
 
     public void createContact(ContactData contact) {
         openContactsPage();
-        type (By.name ("firstname"), contact.firstName());
-        type(By.name ("middlename"), contact.middleName());
-        type(By.name ("lastname"), contact.lastName());
+        type(By.name("firstname"), contact.firstName());
+        type(By.name("middlename"), contact.middleName());
+        type(By.name("lastname"), contact.lastName());
         click(By.name("submit"));
         openHomePage(manager);
     }
@@ -38,5 +39,32 @@ public class ContactsHelper extends HelperBase {
 
     public boolean isContactPresent() {
         return manager.isElementPresent(By.name("selected[]"));
+    }
+
+    private void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void modifyContact(ContactData modifiedContact) {
+        openHomePage(manager);
+        selectContact();
+        initContactModification();
+        fillContactForm(modifiedContact);
+        submitContactModification();
+        openHomePage(manager);
+    }
+
+    private void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    private void initContactModification() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    private void fillContactForm(ContactData contact) {
+        type(By.name("firstname"), contact.firstName());
+        type(By.name("middlename"), contact.middleName());
+        type(By.name("lastname"), contact.lastName());
     }
 }
