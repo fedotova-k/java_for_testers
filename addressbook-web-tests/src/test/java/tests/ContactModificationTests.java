@@ -10,6 +10,8 @@ public class ContactModificationTests extends TestBase {
         if (app.contact().getCount() == 0) {
             app.contact().createContact(new ContactData().withFullName("First name", "Middle name", "Last name"));
         }
-        app.contact().modifyContact(new ContactData().withFullName("modified First name", "modified Middle name", "modified last name"));
+        for (int i = 0; i <= app.contact().getCount(); i++) {
+            app.contact().modifyContact(new ContactData().withFullName(randomString(i * 5), randomString(i), randomString(i*10)));
+        }
     }
 }

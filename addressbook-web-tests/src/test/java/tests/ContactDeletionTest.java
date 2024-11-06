@@ -1,7 +1,6 @@
 package tests;
 
 import model.ContactData;
-import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ public class ContactDeletionTest extends TestBase {
         }
         int contactCount = app.contact().getCount();
 
-        app.contact().deleteContact(app);
+        app.contact().removeContact();
         int newContactCount = app.contact().getCount();
         Assertions.assertEquals(contactCount - 1, newContactCount);
     }
@@ -25,7 +24,7 @@ public class ContactDeletionTest extends TestBase {
             app.contact().createContact(new ContactData().withFirstName("test"));
         }
         app.contact().removeAllContacts();
-        Assertions.assertEquals(0, app.groups().getCount());
+        Assertions.assertEquals(0, app.contact().getCount());
     }
 }
 

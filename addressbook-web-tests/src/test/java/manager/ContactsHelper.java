@@ -15,16 +15,20 @@ public class ContactsHelper extends HelperBase {
         type(By.name("middlename"), contact.middleName());
         type(By.name("lastname"), contact.lastName());
         click(By.name("submit"));
-        openHomePage(manager);
+        openHomePage();
     }
 
-    public void deleteContact(ApplicationManager manager) {
-        click(By.name("selected[]"));
+    public void removeContact() {
+        openHomePage();
+        selectContact();
+        deleteSelectedContact();
+    }
+
+    public void deleteSelectedContact() {
         click(By.xpath("//input[@value=\'Delete\']"));
-        manager.contact().openHomePage(manager);
     }
 
-    public void openHomePage(ApplicationManager manager) {
+    public void openHomePage() {
         if (!manager.isElementPresent(By.name("home"))) {
             click(By.linkText("home"));
         }
@@ -41,12 +45,11 @@ public class ContactsHelper extends HelperBase {
     }
 
     public void modifyContact(ContactData modifiedContact) {
-        openHomePage(manager);
+        openHomePage();
         selectContact();
         initContactModification();
         fillContactForm(modifiedContact);
         submitContactModification();
-        openHomePage(manager);
     }
 
     private void submitContactModification() {
@@ -64,17 +67,17 @@ public class ContactsHelper extends HelperBase {
     }
 
     public int getCount() {
-        openHomePage(manager);
+        openHomePage();
         return manager.driver.findElements(By.name("selected[]")).size();
     }
 
     public void removeAllContacts() {
-        openHomePage(manager);
+        openHomePage();
         selectAllContacts();
-        deleteContact(manager);
+        deleteSelectedContact();
     }
 
-    private void selectAllContacts() {
+    public void selectAllContacts() {
         var checkboxes = manager.driver.findElements(By.name("selected[]"));
         for (var checkbox : checkboxes) {
             checkbox.click();
