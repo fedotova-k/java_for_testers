@@ -1,7 +1,6 @@
 package manager;
 
 import model.ContactData;
-import model.GroupData;
 import org.openqa.selenium.By;
 
 public class ContactsHelper extends HelperBase {
@@ -66,5 +65,10 @@ public class ContactsHelper extends HelperBase {
         type(By.name("firstname"), contact.firstName());
         type(By.name("middlename"), contact.middleName());
         type(By.name("lastname"), contact.lastName());
+    }
+
+    public int getCount() {
+        openHomePage(manager);
+        return manager.driver.findElements(By.name("selected[]")).size();
     }
 }
