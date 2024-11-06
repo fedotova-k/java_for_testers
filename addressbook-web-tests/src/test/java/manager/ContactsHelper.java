@@ -36,10 +36,6 @@ public class ContactsHelper extends HelperBase {
         }
     }
 
-    public boolean isContactPresent() {
-        return manager.isElementPresent(By.name("selected[]"));
-    }
-
     private void selectContact() {
         click(By.name("selected[]"));
     }
@@ -70,5 +66,18 @@ public class ContactsHelper extends HelperBase {
     public int getCount() {
         openHomePage(manager);
         return manager.driver.findElements(By.name("selected[]")).size();
+    }
+
+    public void removeAllContacts() {
+        openHomePage(manager);
+        selectAllContacts();
+        deleteContact(manager);
+    }
+
+    private void selectAllContacts() {
+        var checkboxes = manager.driver.findElements(By.name("selected[]"));
+        for (var checkbox : checkboxes) {
+            checkbox.click();
+        }
     }
 }
