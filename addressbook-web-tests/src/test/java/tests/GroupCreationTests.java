@@ -32,6 +32,7 @@ public class GroupCreationTests extends TestBase {
 
     @ParameterizedTest
     @MethodSource("groupProvider")
+
     public void createMultipleGroups(GroupData group) {
         var oldGroups = app.groups().getList();
 

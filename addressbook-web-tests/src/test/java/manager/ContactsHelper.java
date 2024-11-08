@@ -1,7 +1,6 @@
 package manager;
 
 import model.ContactData;
-import model.GroupData;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
@@ -91,7 +90,7 @@ public class ContactsHelper extends HelperBase {
     public List<ContactData> getList() {
         openHomePage();
         var contacts = new ArrayList<ContactData>();
-        var spans = manager.driver.findElements(By.cssSelector(".entry"));
+        var spans = manager.driver.findElements(By.cssSelector(".odd"));
         for (var span :spans) {
             var name = span.getText();
             var checkbox = span.findElement(By.name("selected[]"));
