@@ -15,7 +15,6 @@ public class ContactsHelper extends HelperBase {
     public void createContact(ContactData contact) {
         openContactsPage();
         type(By.name("firstname"), contact.firstName());
-        type(By.name("middlename"), contact.middleName());
         type(By.name("lastname"), contact.lastName());
         click(By.name("submit"));
         openHomePage();
@@ -25,10 +24,11 @@ public class ContactsHelper extends HelperBase {
         openHomePage();
         selectContact(contact);
         deleteSelectedContact();
+        openHomePage();
     }
 
     public void deleteSelectedContact() {
-        click(By.xpath("//input[@value=\'Delete\']"));
+        click(By.xpath("//input[@value='Delete']"));
     }
 
     public void openHomePage() {
@@ -65,7 +65,6 @@ public class ContactsHelper extends HelperBase {
 
     private void fillContactForm(ContactData contact) {
         type(By.name("firstname"), contact.firstName());
-        type(By.name("middlename"), contact.middleName());
         type(By.name("lastname"), contact.lastName());
     }
 
@@ -88,7 +87,7 @@ public class ContactsHelper extends HelperBase {
     }
 
     public List<ContactData> getList() {
-        openHomePage();
+       openHomePage();
         var contacts = new ArrayList<ContactData>();
         var spans = manager.driver.findElements(By.cssSelector(".odd"));
         for (var span :spans) {
