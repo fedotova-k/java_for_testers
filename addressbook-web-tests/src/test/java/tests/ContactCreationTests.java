@@ -1,7 +1,9 @@
 package tests;
 
+import common.CommonFunctions;
 import model.ContactData;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -10,6 +12,16 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactCreationTests extends TestBase {
+
+    @Test
+   void canCreateContactWithImage() {
+        var contact = new ContactData()
+                .withFirstName(CommonFunctions.randomString(10))
+                .withLastName("somename")
+                .withPhoto(randomFile("src/test/resources/images"));
+        app.contact().createContact(contact);
+    }
+
 
     public static List<ContactData> contactProvider() {
         var result = new ArrayList<ContactData>();
@@ -21,8 +33,8 @@ public class ContactCreationTests extends TestBase {
 
         for (int i = 0; i < 11; i++) {
             result.add(new ContactData()
-                    .withFirstName(randomString(i * 4))
-                    .withLastName(randomString(i * 4)));
+                    .withFirstName(CommonFunctions.randomString(i * 4))
+                    .withLastName(CommonFunctions.randomString(i * 4)));
         }
         return result;
     }
@@ -50,7 +62,7 @@ public class ContactCreationTests extends TestBase {
     public static List<ContactData> negativeContactProvider() {
 
         var result = new ArrayList<ContactData>(List.of(
-                new ContactData("", "first name' ", "", "")));
+                new ContactData("", "first name' ", "", "", "")));
         return result;
     }
 
