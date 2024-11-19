@@ -48,8 +48,8 @@ public class ContactsHelper extends HelperBase {
     }
 
     public void modifyContact(ContactData contact, ContactData modifiedContact) {
-        openHomePage();
-        selectContact(contact);
+        //openHomePage();
+       // selectContact(contact);
         initContactModification();
         fillContactForm(modifiedContact);
         submitContactModification();
@@ -68,7 +68,7 @@ public class ContactsHelper extends HelperBase {
         type(By.name("middlename"), contact.middleName());
         type(By.name("lastname"), contact.lastName());
         attach(By.name("photo"), contact.photo());
-            }
+    }
 
     public int getCount() {
         openHomePage();
@@ -89,7 +89,6 @@ public class ContactsHelper extends HelperBase {
     }
 
     public List<ContactData> getList() {
-       openHomePage();
         var contacts = new ArrayList<ContactData>();
         var spans = manager.driver.findElements(By.cssSelector(".odd"));
         for (var span :spans) {
