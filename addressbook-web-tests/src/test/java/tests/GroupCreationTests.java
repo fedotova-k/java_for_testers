@@ -58,7 +58,6 @@ public class GroupCreationTests extends TestBase {
 
     @ParameterizedTest
     @MethodSource("singleRandomGroup")
-
     public void createGroup(GroupData group) {
         var oldGroups = app.jdbc().getGroupList();
 
