@@ -11,16 +11,16 @@ import java.util.Random;
 public class GroupModificationTests extends TestBase {
     @Test
     void canModifyGroup() {
-        if (app.groups().getCount() == 0) {
-            app.groups().createGroup(new GroupData("", "New group", "header", "footer"));
+        if (app.hbm().getGroupCount() == 0) {
+            app.hbm().createGroup(new GroupData("", "New group", "header", "footer"));
         }
 
-        var oldGroups = app.groups().getList();
+        var oldGroups = app.hbm().getGroupList();
         var random = new Random();
         var index = random.nextInt(oldGroups.size());
         var testData = new GroupData().withName("modified");
         app.groups().modifyGroup(oldGroups.get(index), testData);
-        var newGroups = app.groups().getList();
+        var newGroups = app.hbm().getGroupList();
         var expectedList = new ArrayList<>(oldGroups);
         expectedList.set(index,testData.withId(oldGroups.get(index).id()));
         Comparator<GroupData> compareById = (o1, o2) -> {
