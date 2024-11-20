@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import common.CommonFunctions;
 import model.ContactData;
 import model.GroupData;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +23,7 @@ import java.util.List;
 public class ContactCreationTests extends TestBase {
 
     public static List<ContactData> contactProvider() throws IOException {
-            var result = new ArrayList<ContactData>();
+        var result = new ArrayList<ContactData>();
             /*for (var firstName : List.of("", "First name")) {
                 for (var lastName : List.of("", "last Name")) {
                     result.add(new ContactData().withFirstName(firstName).withLastName(lastName));
@@ -43,7 +44,8 @@ public class ContactCreationTests extends TestBase {
 
         //var json = Files.readString(Paths.get("contact.json"));
         ObjectMapper mapper = new ObjectMapper();
-        var value = mapper.readValue(json, new TypeReference<List<ContactData>>() {});
+        var value = mapper.readValue(json, new TypeReference<List<ContactData>>() {
+        });
         result.addAll(value);
         return result;
     }
@@ -83,6 +85,34 @@ public class ContactCreationTests extends TestBase {
         app.contact().createContact(contact);
         int newContactCount = app.contact().getCount();
         Assertions.assertEquals(contactCount, newContactCount);
+    }
+
+    @Test
+    void canCreateContact() {
+        var contact = new ContactData()
+                .withFirstName(CommonFunctions.randomString(7))
+                .withLastName(CommonFunctions.randomString(8))
+                .withPhoto(randomFile("src/test/resources/images"));
+        app.contact().createContact(contact);
+    }
+
+    @Test
+    void canCreateContactInGroup() {
+        var contact = new ContactData()
+                .withFirstName(CommonFunctions.randomString(7))
+                .withLastName(CommonFunctions.randomString(8))
+                .withPhoto(randomFile("src/test/resources/images"));
+
+        if (app.hbm().getGroupCount() == 0) {
+            app.hbm().createGroup(new GroupData("", "New group", "header", "footer"));
+        }
+        var group = app.hbm().getGroupList().get(0);
+
+        var oldRelated = app.hbm().getContactsInGroup(group);
+        app.contact().createContact(contact, group);
+        var newRelated = app.hbm().getContactsInGroup(group);
+        Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
+
     }
 }
 
